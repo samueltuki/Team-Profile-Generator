@@ -86,92 +86,98 @@ function start() {
           default:
             buildTeam();
         }
-        
-      })
-  };
-
-// function to handle generating engineer
-
-function createEngineer() {
-inquirer.prompt([
-  {
-    type: 'input',
-    message: 'what is the engineer name',
-   name: 'engineerName',
-
-  },
-  {
-    type: 'input',
-    message: 'what is the engineer id',
-   name: 'engineerId',
-   
-  },
-  {
-    type: 'input',
-    message: 'what is the engineer email',
-   name: 'engineerEmail',
-   
-  },
-  {
-    type: 'input',
-    message: 'what is the engineer GitHub',
-   name: 'engineerGithub',
-   
+      });
   }
-]).then(answers => {
-  const engineer = new Engineer(
-    answers.name,
-    answers.id,
-    answers.email,
-    answers.gitHub
-  );
-  team.push(engineer);
-  createTeam();
 
-}
+  // function to handle generating engineer
 
-)
-};
+  function createEngineer() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "what is the engineer name",
+          name: "engineerName",
+        },
+        {
+          type: "input",
+          message: "what is the engineer id",
+          name: "engineerId",
+        },
+        {
+          type: "input",
+          message: "what is the engineer email",
+          name: "engineerEmail",
+        },
+        {
+          type: "input",
+          message: "what is the engineer GitHub",
+          name: "engineerGithub",
+        },
+      ])
+      .then((answers) => {
+        const engineer = new Engineer(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.gitHub
+        );
+        team.push(engineer);
+        createTeam();
+      });
+  }
 
   // function to handle generating intern
 
-function createIntern() {
-   inquirer.prompt([
-    {
-      type: 'input',
-      message: 'What is the name of the intern?',
-      name: 'name',
-    },
-    {
-      type: 'input',
-      message: 'What is the id of the intern?',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'What is the email of the intern?',
-      name: 'email',
-    },
-    {
-      type: 'input',
-      message: 'What is the school of the intern?',
-      name: 'school',
-    },
-   ]).then( answers => {
-    const intern = new Intern(
-      answers.name,
-      answers.id,
-      answers.email,
-      answers.school
-    );
-    team.push(intern);
-    createTeam();
-   }
-
-   )
-}
+  function createIntern() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "What is the name of the intern?",
+          name: "name",
+        },
+        {
+          type: "input",
+          message: "What is the id of the intern?",
+          name: "id",
+        },
+        {
+          type: "input",
+          message: "What is the email of the intern?",
+          name: "email",
+        },
+        {
+          type: "input",
+          message: "What is the school of the intern?",
+          name: "school",
+        },
+      ])
+      .then((answers) => {
+        const intern = new Intern(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.school
+        );
+        team.push(intern);
+        createTeam();
+      });
+  }
 
   // function to buildTeam - will use fs.writeFileSync & pass in the outputPath created above, call to render (dont forget to pass in the employee array), & "utf-8"
+  function buildTeam() {
+    // create the output directory if it doesn't exist
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR);
+    }
+
+    // write the HTML file using the rendered template and employee data
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+
+    console.log("Successfully generated team profile!");
+  }
+
 
   createManager(); // starts of the whole chain of events.
 }
