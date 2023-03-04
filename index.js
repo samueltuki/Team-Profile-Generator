@@ -117,10 +117,10 @@ function start() {
       ])
       .then((answers) => {
         const engineer = new Engineer(
-          answers.name,
-          answers.id,
-          answers.email,
-          answers.gitHub
+          answers.engineerName,
+          answers.engineerId,
+          answers.engineerEmail,
+          answers.engineerGithub,
         );
         team.push(engineer);
         createTeam();
