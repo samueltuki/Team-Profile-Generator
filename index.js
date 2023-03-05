@@ -172,7 +172,7 @@ function start() {
       fs.mkdirSync(OUTPUT_DIR);
     }
 
-    // write the HTML file using the rendered template and employee data
+    // write the HTML file using the rendered template and employee data from the team array as argument
     fs.writeFileSync(outputPath, render(team), "utf-8");
 
     console.log("Successfully generated team profile!");
