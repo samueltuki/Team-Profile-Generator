@@ -4,7 +4,7 @@
 
 This is a Node.js command line interface application built to help generate a useful basic profile based on the information given by the user.
 
-## installation 
+## Installation 
 
  run install --save inquirer@^8.0.0 for the runtime environment
 
